@@ -23,7 +23,8 @@ public class ConsoleProgress implements Runnable {
                         count = 0;
                     }
                 }
-            } catch(InterruptedException e){
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
