@@ -4,8 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Wget implements Runnable {
 
@@ -23,21 +21,19 @@ public class Wget implements Runnable {
             FileOutputStream fileOutputStream = new FileOutputStream("pom_tmp.xml");
             byte[] buff = new byte[1024];
             int bytesRead;
+            int loadedData = 0;
             long start = System.currentTimeMillis();
-            System.out.println("Start: ".concat(String.valueOf(start)));
-            String startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(start));
-            System.out.println("StartDate: ".concat(startDate));
             while ((bytesRead = in.read(buff)) != -1) {
-                fileOutputStream.write(buff, 0, bytesRead);
-                long finish = System.currentTimeMillis();
-                System.out.println("Finished: ".concat(String.valueOf(finish))
-                        .concat(" | Diff = ")
-                        .concat(String.valueOf(finish - start)));
-                String finishDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(finish));
-                System.out.println("FinishDate: ".concat(finishDate));
-                if ((finish - start) < speed) {
-                    Thread.sleep(1000);
+                loadedData += bytesRead;
+                if (loadedData >= speed) {
+                    long finish = System.currentTimeMillis();
+                    if ((finish - start) < 1000) {
+                        Thread.sleep(1000 - (finish - start));
+                        loadedData = 0;
+                        start = System.currentTimeMillis();
+                    }
                 }
+                fileOutputStream.write(buff, 0, bytesRead);
             }
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
