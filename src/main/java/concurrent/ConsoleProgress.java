@@ -2,8 +2,6 @@ package concurrent;
 
 public class ConsoleProgress implements Runnable {
 
-    private final char[] process = new char[]{'\\', '|', '/'};
-
     public static void main(String[] args) throws InterruptedException {
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
@@ -13,13 +11,13 @@ public class ConsoleProgress implements Runnable {
 
     @Override
     public void run() {
+        char[] process = new char[]{'\\', '|', '/'};
         try {
             int count = 0;
-            int processLife = process.length;
             while (!Thread.currentThread().isInterrupted()) {
                 Thread.sleep(500);
                 System.out.print("\r load: " + process[count++]);
-                    if (count >= processLife) {
+                    if (count >= process.length) {
                         count = 0;
                     }
                 }
