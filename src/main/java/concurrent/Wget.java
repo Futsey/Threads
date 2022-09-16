@@ -12,10 +12,10 @@ public class Wget implements Runnable {
     private final int speed;
     private static final String VALIDATE = """
             Please check your arguments. You must enter:
-            1. URL. (For example: https://.google.com);
+            1. URL. (For example: https:%s/.google.com);
             2. Destination file name to write your data;
             3. Maximum download speed limit in Kb. For example: 10000 Kb = 80Mbit;
-            """;
+            """.formatted("/");
 
     public Wget(String url, String dest, int speed) {
         this.url = url;
