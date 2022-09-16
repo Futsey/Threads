@@ -10,7 +10,7 @@ public class Wget implements Runnable {
     private final String url;
     private final String dest;
     private final int speed;
-    private static final String validate = """
+    private static final String VALIDATE = """
             Please check your arguments. You must enter:
             1. URL. (For example: https://.google.com);
             2. Destination file name to write your data;
@@ -50,7 +50,7 @@ public class Wget implements Runnable {
 
     public static void main(String[] args) throws InterruptedException {
         if (args.length < 3) {
-            throw new IllegalArgumentException(validate);
+            throw new IllegalArgumentException(VALIDATE);
         }
         String url = args[0];
         String dest = args[1];
