@@ -10,6 +10,12 @@ public class Wget implements Runnable {
     private final String url;
     private final String dest;
     private final int speed;
+    private static final String validate = """
+            Please check your arguments. You must enter:
+            1. URL. (For example: https://.google.com);
+            2. Destination file name to write your data;
+            3. Maximum download speed limit in Kb. For example: 10000 Kb = 80Mbit;
+            """;
 
     public Wget(String url, String dest, int speed) {
         this.url = url;
@@ -44,7 +50,7 @@ public class Wget implements Runnable {
 
     public static void main(String[] args) throws InterruptedException {
         if (args.length < 3) {
-            throw new IllegalArgumentException("Program arguments is null");
+            throw new IllegalArgumentException(validate);
         }
         String url = args[0];
         String dest = args[1];
