@@ -24,7 +24,7 @@ public class UserCache {
         Iterator<Integer> it = users.keySet().iterator();
         while (it.hasNext()) {
             Integer i = it.next();
-            copyList.add(users.get(i));
+            copyList.add(User.of(users.get(i).getName()));
         }
         return copyList;
     }
