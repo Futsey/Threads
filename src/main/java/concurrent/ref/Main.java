@@ -9,6 +9,11 @@ public class Main {
         User us3 = new User();
         User us4 = new User();
         User us5 = new User();
+        us1.setId(1);
+        us2.setId(2);
+        us3.setId(3);
+        us4.setId(4);
+        us5.setId(5);
         us1.setName("Oleg1");
         us2.setName("Oleg2");
         us3.setName("Oleg3");
