@@ -11,7 +11,7 @@ public class SaveToTXTFile implements SaveFile {
             for (int i = 0; i < file.length(); i++) {
                 os.write(file.charAt(i));
             }
-            System.out.println("File saved to txt: " + target.getAbsolutePath());
+            System.out.println("File saved to txt: ".concat(target.getAbsolutePath()));
             rsl = true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,10 +10,10 @@ public class FileTest {
         File fileToSave = new File("C:\\Users\\Fut\\Desktop\\test\\TestOut.txt");
         File fileToSaveUnicode = new File("C:\\Users\\Fut\\Desktop\\test\\TestOutUnicode.txt");
         ParseFile parse = new ParseFile(file);
-        parse.parseAllContent();
-        parse.parseContentWithoutUnicode();
+        parse.getContent();
+        parse.getContentWithoutUnicode();
         SaveFile save = new SaveToTXTFile();
-        save.save(parse.parseAllContent(), fileToSave);
-        save.save(parse.parseContentWithoutUnicode(), fileToSaveUnicode);
+        save.save(parse.getContent(), fileToSave);
+        save.save(parse.getContentWithoutUnicode(), fileToSaveUnicode);
     }
 }
