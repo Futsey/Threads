@@ -26,11 +26,11 @@ public final class ParseFile {
         return output.toString();
     }
 
-    public synchronized String getContent() {
+    public String getContent() {
         return parse(data -> true);
     }
 
-    public synchronized String getContentWithoutUnicode() {
+    public String getContentWithoutUnicode() {
         return parse(data -> data < 128);
     }
 }
