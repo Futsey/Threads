@@ -8,12 +8,20 @@ class SimpleBlockingQueueTest {
 
     @Test
     public void whenAddNewValueSuccesfull() throws InterruptedException {
-        SimpleBlockingQueue<Integer> simpleBlockingQueue = new SimpleBlockingQueue();
+        SimpleBlockingQueue<Integer> simpleBlockingQueue = new SimpleBlockingQueue(3);
         Thread producer = new Thread(() -> {
-            simpleBlockingQueue.offer(1);
+            try {
+                simpleBlockingQueue.offer(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
         Thread consumer = new Thread(() -> {
-            simpleBlockingQueue.poll();
+            try {
+                simpleBlockingQueue.poll();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
         int actualElement = 1;
         int expectedElement = 1;
@@ -26,15 +34,35 @@ class SimpleBlockingQueueTest {
 
     @Test
     public void whenAddSeveralNewValuesSuccesfull() throws InterruptedException {
-        SimpleBlockingQueue<Integer> simpleBlockingQueue1 = new SimpleBlockingQueue();
+        SimpleBlockingQueue<Integer> simpleBlockingQueue1 = new SimpleBlockingQueue(3);
         Thread producer = new Thread(() -> {
-            simpleBlockingQueue1.offer(1);
-            simpleBlockingQueue1.offer(2);
-            simpleBlockingQueue1.offer(3);
+            try {
+                simpleBlockingQueue1.offer(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                simpleBlockingQueue1.offer(2);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                simpleBlockingQueue1.offer(3);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
         Thread consumer = new Thread(() -> {
-            simpleBlockingQueue1.poll();
-            simpleBlockingQueue1.poll();
+            try {
+                simpleBlockingQueue1.poll();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                simpleBlockingQueue1.poll();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
         int actualElement = 3;
         producer.start();

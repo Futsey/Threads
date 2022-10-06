@@ -10,34 +10,27 @@ import java.util.Queue;
 public class SimpleBlockingQueue<T> {
 
     @GuardedBy("this")
-    private final Queue<T> queue;
+    private final Queue<T> queue = new LinkedList<>();
+    private final int queueSize;
 
-    public SimpleBlockingQueue() {
-        queue = new LinkedList<>();
+    public SimpleBlockingQueue(int queueSize) {
+        this.queueSize = queueSize;
     }
 
-    public synchronized void offer(T value) {
-        while (queue.peek() != null) {
-            try {
-                System.out.println("Queue is full. Waiting for consumer");
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public synchronized void offer(T value) throws InterruptedException {
+        while (queue.size() >= queueSize) {
+            System.out.println("Queue is full. Waiting for consumer");
+            wait();
         }
         System.out.println("Adding new value: " + value);
         queue.offer(value);
         notifyAll();
     }
 
-    public synchronized T poll() {
-        while (queue.peek() == null) {
-            try {
-                System.out.println("Queue is empty. Nothing to delete");
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public synchronized T poll() throws InterruptedException {
+        while (queue.size() < 1) {
+            System.out.println("Queue is empty. Nothing to delete");
+            wait();
         }
         T removeObj = queue.poll();
         System.out.println("Value was removed: " + removeObj);
