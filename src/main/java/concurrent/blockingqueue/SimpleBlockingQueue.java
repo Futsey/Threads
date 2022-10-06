@@ -41,4 +41,8 @@ public class SimpleBlockingQueue<T> {
     public synchronized T getElement() {
         return queue.element();
     }
+
+    public boolean isEmpty() {
+        return queue.peek() == null;
+    }
 }
