@@ -1,15 +1,17 @@
 package concurrent.cas;
 
 import net.jcip.annotations.ThreadSafe;
+
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ThreadSafe
 public class CASCount {
 
-    private final AtomicReference<Integer> count;
+    private final AtomicInteger count;
 
     public CASCount(int n) {
-        count = new AtomicReference<>(n);
+        count = new AtomicInteger(n);
     }
 
     public void increment() {

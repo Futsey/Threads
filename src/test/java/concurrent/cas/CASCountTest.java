@@ -11,22 +11,22 @@ class CASCountTest {
     public void whenSuccesfullIncrement() throws InterruptedException {
         CASCount casCount = new CASCount(100);
         Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < 111; i++) {
                 casCount.increment();
             }
         });
         Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 222; i++) {
                 casCount.increment();
             }
         });
         Thread thread3 = new Thread(() -> {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 333; i++) {
                 casCount.increment();
             }
         });
         Thread thread4 = new Thread(() -> {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 444; i++) {
                 casCount.increment();
             }
         });
@@ -38,6 +38,6 @@ class CASCountTest {
         thread2.join();
         thread3.join();
         thread4.join();
-        assertThat(casCount.get(), is(110));
+        assertThat(casCount.get(), is(1210));
     }
 }
