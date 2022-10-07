@@ -6,7 +6,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

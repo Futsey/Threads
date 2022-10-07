@@ -43,6 +43,6 @@ public class SimpleBlockingQueue<T> {
     }
 
     public boolean isEmpty() {
-        return queue.peek() == null;
+        return queue.isEmpty();
     }
 }
