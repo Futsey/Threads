@@ -40,5 +40,4 @@ class CacheTest {
                 cache.update(newBase));
         assertEquals("Versions are not equal", exception.getMessage());
     }
-
 }
