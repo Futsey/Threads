@@ -17,7 +17,7 @@ public class ParallelMergeSort extends RecursiveTask<int[]> {
 
     @Override
     protected int[] compute() {
-        if (from == to) {
+        if (from == to || array.length < 10) {
             return new int[] {array[from]};
         }
         int mid = (from + to) / 2;
