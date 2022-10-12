@@ -34,9 +34,10 @@ public class ParallelIndexSearch<T> extends RecursiveTask<Integer> {
 
     private int getEl() {
         int rsl = -1;
-        for (int i = from; i < to; i++) {
-            if (array[i] == this.el) {
+        for (int i = from; i <= to; i++) {
+            if (array[i].equals(this.el)) {
                 rsl = i;
+                break;
             }
         }
         return rsl;
