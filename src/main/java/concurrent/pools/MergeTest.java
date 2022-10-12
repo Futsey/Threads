@@ -1,7 +1,5 @@
 package concurrent.pools;
 
-import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 
 public class MergeTest {
@@ -24,14 +22,9 @@ public class MergeTest {
         forkJoinPool.invoke(parallelMergeSort);
         System.out.println("Время выполнения MergeSort: "
                 .concat(String.valueOf(System.currentTimeMillis() - startASyncSort)));
-
-        int[] smallArray = {14, 23, 52, 37, 6, 5, 3};
-        int[] midArray = {14, 23, 52, 37, 6, 5, 3, 89, 72, 34, 86, 52, 43, 9, 68, 77};
-        ParallelIndexSearch parallelASyncIndexSearch =
-                new ParallelIndexSearch(smallArray, 0, smallArray.length - 1, 3);
-        System.out.println(parallelASyncIndexSearch.compute());
-        ParallelIndexSearch parallelSyncIndexSearch =
-                new ParallelIndexSearch(midArray, 0, midArray.length - 1, 9);
-        System.out.println(parallelSyncIndexSearch.compute());
+        Integer[] smallArray = {14, 23, 52, 37, 6, 5, 3};
+        Integer[] midArray = {14, 23, 52, 37, 6, 5, 3, 89, 72, 34, 86, 52, 43, 9, 68, 77};
+        System.out.println(ParallelIndexSearch.findIndex(smallArray, 52));
+        System.out.println(ParallelIndexSearch.findIndex(midArray, 9));
     }
 }
