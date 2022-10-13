@@ -8,5 +8,3 @@ Java Multithreading Topics:
 4. **Java Multithreading**: Wait, Notify, NotifyAll
 5. **Java Multithreading**: Non Blocking Algoritm
 6. **Java Multithreading**: Pool
-
-И здесь внесем изменения, согласно заданию по уроку
