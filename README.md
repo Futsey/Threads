@@ -10,3 +10,5 @@ Java Multithreading Topics:
 6. **Java Multithreading**: Pool
 
 
+И здесь внесем изменения, согласно заданию по уроку
+
