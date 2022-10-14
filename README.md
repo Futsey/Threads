@@ -9,4 +9,3 @@ Java Multithreading Topics:
 5. **Java Multithreading**: Non Blocking Algoritm
 6. **Java Multithreading**: Pool
 
-Объединение зафиксированных изменений
