@@ -14,6 +14,7 @@ public class MatrixDiagSumEx {
         int[][] originArr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         RolColSum rolColSum = new RolColSum();
         rolColSum.sum(originArr);
+        RolColSum.asyncSum(originArr);
     }
 
     public static int[] asyncSum(int[][] matrix) throws ExecutionException, InterruptedException {

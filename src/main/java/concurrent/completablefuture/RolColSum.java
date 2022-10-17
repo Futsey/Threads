@@ -1,49 +1,19 @@
 package concurrent.completablefuture;
 
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class RolColSum {
-
-    public static class Sums {
-        private int rowSum;
-        private int colSum;
-
-        public Sums(int rowSum, int colSum) {
-            this.rowSum = rowSum;
-            this.colSum = colSum;
-        }
-
-        public int getRowSum() {
-            return rowSum;
-        }
-
-        public int getColSum() {
-            return colSum;
-        }
-
-        @Override
-        public String toString() {
-            return "Sums{" + "rowSum=" + rowSum
-                    + ", colSum=" + colSum
-                    + '}';
-        }
-    }
 
     public static Sums[] sum(int[][] matrix) {
         Sums sums = new Sums(0, 0);
         Sums[] sumArr = new Sums[matrix.length];
-        boolean isRow;
         for (int x = 0; x < matrix.length; x++) {
             int countX = sums.getColSum();
             int countY = sums.getRowSum();
-            isRow = true;
             for (int y = 0; y < matrix[x].length; y++) {
-                if (isRow) {
-                    for (int row = 0; row < matrix.length; row++) {
-                        countX += matrix[row][x];
-                    }
-                    isRow = false;
-                }
+                countX += matrix[y][x];
                 countY += matrix[x][y];
             }
             Sums sum = new Sums(countX, countY);
@@ -51,5 +21,30 @@ public class RolColSum {
         }
         System.out.println(Arrays.toString(sumArr));
         return sumArr;
+    }
+
+    public static Sums[] asyncSum(int[][] matrix) throws ExecutionException, InterruptedException {
+        int length = matrix.length;
+        Sums[] sums = new Sums[length];
+        for (int i = 0; i < length; i++) {
+            int row = i;
+            CompletableFuture<Integer> sumRow = CompletableFuture.supplyAsync(() -> {
+                int countX = 0;
+                for (int x = 0; x < length; x++) {
+                    countX += matrix[x][row];
+                }
+                return countX;
+            });
+            CompletableFuture<Integer> sumCol = CompletableFuture.supplyAsync(() -> {
+                int countY = 0;
+                for (int y = 0; y < length; y++) {
+                    countY += matrix[row][y];
+                }
+                return countY;
+            });
+            sums[i] = new Sums(sumRow.get(), sumCol.get());
+        }
+        System.out.println(Arrays.toString(sums));
+        return sums;
     }
 }
